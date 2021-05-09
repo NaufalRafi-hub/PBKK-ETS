@@ -52,7 +52,7 @@ namespace manajemen_inventaris
             {
                 comd = new OleDbCommand(query, con);
                 //con.Open();
-                comd.Connection = con;
+                //comd.Connection = con;
                 comd.ExecuteNonQuery();
                 con.Close();
                 MessageBox.Show("insert selesai");

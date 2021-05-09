@@ -906,7 +906,7 @@ namespace manajemen_inventaris
             int startY = 10;
             int offset = 40;
 
-            graphic.DrawString("MAUTHAI", new Font("Intro Rust Base", 9, FontStyle.Bold), new SolidBrush(Color.Black), 63, startY);
+            graphic.DrawString("TEKOPI", new Font("Intro Rust Base", 9, FontStyle.Bold), new SolidBrush(Color.Black), 63, startY);
             graphic.DrawString("- Café -", new Font("Intro Rust Base", 6, FontStyle.Bold), new SolidBrush(Color.Black), 76, startY + (int)fontHeight + (int)fontHeight);
             graphic.DrawString("         No. ", new Font("Intro Rust Base", 5, FontStyle.Bold), new SolidBrush(Color.Black), 130, startY + (int)fontHeight + (int)fontHeight + (int)fontHeight);
             graphic.DrawString("Antrian ", new Font("Intro Rust Base", 5, FontStyle.Bold), new SolidBrush(Color.Black), 130, startY + (int)fontHeight + (int)fontHeight + (int)fontHeight + (int)fontHeight);
