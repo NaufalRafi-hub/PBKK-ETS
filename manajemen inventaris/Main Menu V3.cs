@@ -347,17 +347,17 @@ namespace manajemen_inventaris
                     label12.Text = variable.Kembalian.ToString();
                 }
 
+                // print 2 kali
                 for (int i = 0; i <= 1; i++)
                 {
                     PrintDialog printDialog = new PrintDialog();
 
                     PrintDocument printDocument = new PrintDocument();
 
-                    printDialog.Document = printDocument; //add the document to the dialog box...        
+                    printDialog.Document = printDocument;   
 
-                    printDocument.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(CreateReceipt); //add an event handler that will do the printing
+                    printDocument.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(CreateReceipt); 
 
-                    //on a till you will not want to ask the user where to print but this is fine for the test envoironment.
 
                     DialogResult result = printDialog.ShowDialog();
 
@@ -894,8 +894,6 @@ namespace manajemen_inventaris
 
         public void CreateReceipt(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
-            //this prints the reciept
-
             Graphics graphic = e.Graphics;
 
             Font font = new Font("Intro Rust Base", 6); //must use a mono spaced font as the spaces need to line up
@@ -911,75 +909,64 @@ namespace manajemen_inventaris
             graphic.DrawString("         No. ", new Font("Intro Rust Base", 5, FontStyle.Bold), new SolidBrush(Color.Black), 130, startY + (int)fontHeight + (int)fontHeight + (int)fontHeight);
             graphic.DrawString("Antrian ", new Font("Intro Rust Base", 5, FontStyle.Bold), new SolidBrush(Color.Black), 130, startY + (int)fontHeight + (int)fontHeight + (int)fontHeight + (int)fontHeight);
             graphic.DrawString(manajemen_inventaris.Properties.Settings.Default.antrian.ToString(), new Font("Intro Rust Base", 10, FontStyle.Bold), new SolidBrush(Color.Black), 170, startY + (int)fontHeight + (int)fontHeight + (int)fontHeight);
-            //string top = "Pesanan".PadRight(15) + "Jumlah".PadRight(10) + "Harga".PadRight(10) + "Total";
-            //graphic.DrawString(top, font, new SolidBrush(Color.Black), startX, startY + offset);
-            offset = offset + (int)fontHeight; //make the spacing consistent
+            offset = offset + (int)fontHeight; 
             graphic.DrawString(variable.Nama, new Font("Intro Rust Base", 5, FontStyle.Bold), new SolidBrush(Color.Black), startX, startY + (int)fontHeight + (int)fontHeight + (int)fontHeight);
-            offset = offset + (int)fontHeight; //make the spacing consistent
+            offset = offset + (int)fontHeight; 
             graphic.DrawString("Point: " + point_sebelumnya, new Font("Intro Rust Base", 5, FontStyle.Bold), new SolidBrush(Color.Black), startX, startY + (int)fontHeight + (int)fontHeight + (int)fontHeight + (int)fontHeight);
             graphic.DrawString("---------------------------------------------------------------------", font, new SolidBrush(Color.Black), startX, offset - 5);
-            offset = offset + (int)fontHeight + 5; //make the spacing consistent
+            offset = offset + (int)fontHeight + 5;
 
             for (int p = 0; p < listmenu.Items.Count; p++)
             {
                 string nama_pesanan, substring_pesanan, jumlah_pesanan, harga_pesanan, total_pesanan;
                 nama_pesanan = listmenu.Items[p].SubItems[0].Text;
-                //if (nama_pesanan.Length > 25)
-                //{
-                //    substring_pesanan = nama_pesanan.Substring(0, 11) + "..";
-                //}
-                //else
-                //{
                     substring_pesanan = nama_pesanan;
                     while (substring_pesanan.Length < 25)
                     {
                         substring_pesanan = substring_pesanan + " ";
                     }
-                //}
 
                 harga_pesanan = listmenu.Items[p].SubItems[1].Text;
                 jumlah_pesanan = listmenu.Items[p].SubItems[2].Text;
                 total_pesanan = listmenu.Items[p].SubItems[3].Text;
 
-                //string reciept = substring_pesanan.PadRight(5) + "  " + jumlah_pesanan.PadRight(10) + harga_pesanan.PadRight(10) + total_pesanan;
-                //graphic.DrawString(reciept, font, new SolidBrush(Color.Black), startX, startY + offset);
 
                 graphic.DrawString(substring_pesanan, font, new SolidBrush(Color.Black), startX, offset - 10);
-                offset = offset + (int)fontHeight - 10; //make the spacing consistent
+                offset = offset + (int)fontHeight - 10;
                 string string_harga = jumlah_pesanan + " x " + harga_pesanan;
                 graphic.DrawString(string_harga, font, new SolidBrush(Color.Black), startX, offset);
-                offset = offset + (int)fontHeight; //make the spacing consistent
+                offset = offset + (int)fontHeight; 
                 graphic.DrawString(total_pesanan, font, new SolidBrush(Color.Black), 150, (offset - (int)fontHeight));
 
-                offset = offset + (int)fontHeight + 5; //make the spacing consistent
+                offset = offset + (int)fontHeight + 5; 
             }
             graphic.DrawString("---------------------------------------------------------------------", font, new SolidBrush(Color.Black), startX, offset - 5);
-            offset = offset + (int)fontHeight; //make the spacing consistent
+            offset = offset + (int)fontHeight; 
 
-            //when we have drawn all of the items add the total
+            // Jumlah pesanan
             graphic.DrawString("Total ".PadRight(10) + String.Format("{0:c}", variable.Jumlah), new Font("Intro Rust Base", 6, FontStyle.Bold), new SolidBrush(Color.Black), 100, offset);
 
-            offset = offset + (int)fontHeight + 5; //make the spacing consistent
+            offset = offset + (int)fontHeight + 5; 
             graphic.DrawString("Bayar ".PadRight(10) + String.Format("{0:c}", variable.Bayar), font, new SolidBrush(Color.Black), 100, offset);
-            offset = offset + (int)fontHeight + 5; //make the spacing consistent
+            offset = offset + (int)fontHeight + 5; 
             graphic.DrawString("Penggunaan Point     ".PadRight(10) + String.Format("{0:c}", variable.Penggunaan_Point), font, new SolidBrush(Color.Black), 40, offset);
-            offset = offset + (int)fontHeight + 5; //make the spacing consistent
+            offset = offset + (int)fontHeight + 5; 
             graphic.DrawString("Kembalian       ".PadRight(10) + String.Format("{0:c}", variable.Kembalian), font, new SolidBrush(Color.Black), 75, offset);
-            offset = offset + (int)fontHeight + 5; //make the spacing consistent
+            offset = offset + (int)fontHeight + 5; 
             graphic.DrawString("Sisa point       ".PadRight(10) + String.Format("{0:c}", variable.Point), font, new SolidBrush(Color.Black), startX, offset + 5);
-            offset = offset + (int)fontHeight + 5; //make the spacing consistent
+            offset = offset + (int)fontHeight + 5; 
             graphic.DrawString("---------------------------------------------------------------------", font, new SolidBrush(Color.Black), startX, offset);
-            offset = offset + (int)fontHeight; //make the spacing consistent
+            offset = offset + (int)fontHeight; 
 
             graphic.DrawString("Semua harga", new Font("Intro Rust Base", 6, FontStyle.Bold), new SolidBrush(Color.Black), 62, offset);
-            offset = offset + (int)fontHeight; //make the spacing consistent
+            offset = offset + (int)fontHeight; 
             graphic.DrawString("Telah mendapatkan point 5%", new Font("Intro Rust Base", 6, FontStyle.Bold), new SolidBrush(Color.Black), 25, offset + 3);
-            offset = offset + (int)fontHeight; //make the spacing consistent
+            offset = offset + (int)fontHeight; 
 
             graphic.DrawString("TERIMA KASIH", new Font("Intro Rust Base", 8, FontStyle.Bold), new SolidBrush(Color.Black), 50, offset + (int)fontHeight);
-            offset = offset + (int)fontHeight + (int)fontHeight; //make the spacing consistent
+            offset = offset + (int)fontHeight + (int)fontHeight; 
             graphic.DrawString("Silahkan Datang Kembali!", new Font("Intro Rust Base", 6, FontStyle.Bold), new SolidBrush(Color.Black), 30, offset + (int)fontHeight);
-            offset = offset + (int)fontHeight; //make the spacing consistent
+            offset = offset + (int)fontHeight; 
 
             variable.Penggunaan_Point = 0;
         }

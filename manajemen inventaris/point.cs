@@ -68,10 +68,12 @@ namespace manajemen_inventaris
         {
             if ((Convert.ToInt32(textBox2.Text)) <= variable.Point)
             {
+                // apabila jumlah uang nya kurang daripada jumlah kebutuhannya
                 if (variable.Jumlah - (Convert.ToInt32(textBox2.Text) + Convert.ToInt32(textBox4.Text)) <= 0)
                 {
                     variable.Penggunaan_Point = Convert.ToInt32(textBox2.Text);
                     variable.Kembalian = Convert.ToInt32(textBox4.Text);
+                    // fungsi kurang point dengan penggunaannya
                     variable.Point = variable.Point - variable.Penggunaan_Point;
                     variable.Point = variable.Point + (5 * (Convert.ToInt32(textBox1.Text) - variable.Penggunaan_Point) / 100);
 

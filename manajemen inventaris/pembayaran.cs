@@ -26,6 +26,7 @@ namespace manajemen_inventaris
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
+            // Hitung dan display kembalian
             try
             {
                 int bayar = Convert.ToInt32(textBox2.Text);
@@ -42,6 +43,7 @@ namespace manajemen_inventaris
 
         private void label5_Click(object sender, EventArgs e)
         {
+            // apabila bayar menggunakan point
             point pembayaran_point = new point();
             this.Hide();
             pembayaran_point.ShowDialog();
